@@ -38,17 +38,35 @@ public class Vector2
 
     public void add(Vector2 v2)
     {
-        setX(this.getX() * v2.getX());
-        setY(this.getX() * v2.getY());
+        setX(this.getX() + v2.getX());
+        setY(this.getX() + v2.getY());
     }
 
     public Vector2 createAddedVector(Vector2 ... vector2s)
     {
-        Vector2 finalVector = new Vector2(0 ,0,);
+        Vector2 finalVector = new Vector2(0 ,0);
 
         for(Vector2 v : vector2s)
         {
             finalVector.add(v);
+        }
+
+        return finalVector;
+    }
+
+    public void multiply(Vector2 v2)
+    {
+        setX(this.getX() * v2.getX());
+        setY(this.getX() * v2.getY());
+    }
+
+    public Vector2 createMultipliedVector(Vector2 ... vector2s)
+    {
+        Vector2 finalVector = new Vector2(0 ,0);
+
+        for(Vector2 v : vector2s)
+        {
+            finalVector.multiply(v);
         }
 
         return finalVector;
