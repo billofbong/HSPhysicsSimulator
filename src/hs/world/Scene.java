@@ -20,7 +20,9 @@ public class Scene
     static
     {
          DEMO_SCENE = new Scene(1);
-         DEMO_SCENE.add(new Rect(new Vector2(0, -1f), new Point2D.Float(0, 0), .1f, .1f));
+         Vector2 gravity = new Vector2(0, -.1f);
+         Point2D.Float origin = new Point2D.Float(0f, 0f);
+         DEMO_SCENE.add(new Rect(gravity , origin, .1f, .1f));
     }
     
     private ArrayList<SceneObject> sceneObjects;

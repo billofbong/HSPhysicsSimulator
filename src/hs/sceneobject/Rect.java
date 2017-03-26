@@ -5,7 +5,7 @@ import hs.physics.Vector2;
 import java.awt.geom.Point2D;
 
 /**
- * Created by hshack on 3/25/17.
+ * @author Will Wright
  */
 public class Rect extends Polygon
 {
@@ -16,26 +16,25 @@ public class Rect extends Polygon
     public Rect(Vector2 gravity, Point2D.Float origin)
     {
         super(gravity, origin);
-        addVertices();
+        vertices.add(new Point2D.Float(-xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, -yScale));
+        vertices.add(new Point2D.Float(-xScale, -yScale));
     }
 
     public Rect(Vector2 gravity, Point2D.Float origin, float xScale, float yScale)
     {
         super(gravity, origin, xScale, yScale);
-
-        System.out.println(gravity);
-
-        addVertices();
+    
+        vertices.add(new Point2D.Float(-xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, -yScale));
+        vertices.add(new Point2D.Float(-xScale, -yScale));
     }
 
     public Rect(Vector2 gravity, Point2D.Float origin, float xScale, float yScale, boolean hasPhysics, int numSides)
     {
         super(gravity, origin, xScale, yScale, hasPhysics, numSides);
-        addVertices();
-    }
-
-    private void addVertices()
-    {
         vertices.add(new Point2D.Float(-xScale, yScale));
         vertices.add(new Point2D.Float(xScale, yScale));
         vertices.add(new Point2D.Float(xScale, -yScale));

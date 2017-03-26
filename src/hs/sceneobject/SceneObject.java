@@ -7,19 +7,20 @@ import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
- * Created by hshack on 3/25/17.
+ * @author Corbin Naderzad
+ * @author Will Wright
  */
 public class SceneObject
 {
 
-    protected Vector2 gravity;
+    private Vector2 gravity;
     protected ArrayList<Point2D.Float> vertices = new ArrayList<>();
     protected Point2D.Float origin;
     protected ArrayList<Component> components = new ArrayList<>();
     protected float xScale = .1f, yScale = .1f;
     protected boolean hasPhysics = true;
 
-    protected Vector2 velocity = new Vector2(0, 0);
+    protected Vector2 velocity;
 
     /**
      *
@@ -29,6 +30,7 @@ public class SceneObject
     {
         this.gravity = gravity;
         this.origin = origin;
+        velocity = new Vector2(0f, 0f);
 
     }
 
@@ -44,7 +46,7 @@ public class SceneObject
         this.origin = origin;
         this.xScale = xScale;
         this.yScale = yScale;
-
+        velocity = new Vector2(0f, 0f);
 
         System.out.println(this.gravity);
     }
@@ -56,6 +58,7 @@ public class SceneObject
         this.xScale = xScale;
         this.yScale = yScale;
         this.hasPhysics = hasPhysics;
+        velocity = new Vector2(0f, 0f);
     }
 
     /**
@@ -108,5 +111,27 @@ public class SceneObject
     public Point2D.Float getOrigin()
     {
         return origin;
+    }
+    
+    public void setOrigin(Point2D.Float origin)
+    {
+        this.origin = origin;
+    }
+    
+    public void setOrigin(float x, float y)
+    {
+        origin = new Point2D.Float(x, y);
+    }
+    
+    public void addToOrigin(Point2D.Float addedVal)
+    {
+        origin.x += addedVal.x;
+        origin.y += addedVal.y;
+    }
+    
+    public void addToOrigin(float x, float y)
+    {
+        origin.x = x;
+        origin.y = y;
     }
 }
