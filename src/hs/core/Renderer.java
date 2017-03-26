@@ -5,10 +5,35 @@ import hs.physics.Vector2;
  * @author Corbin Naderzad
  * @author Will Wright
  */
-public class Renderer
+public class Renderer implements Runnable
 {
-    public static void main(String[] args)
+    private boolean running;
+    private Thread thread;
+
+    public Renderer()
     {
-        System.out.println(new Vector2());
+        running = false;
+        thread = new Thread(this);
+        thread.setName("Main renderering Thread");
+        thread.setPriority(8);
+    }
+
+    public void start()
+    {
+        if(!running)
+        {
+            running = true;
+
+        }
+    }
+
+    public void stop()
+    {
+
+    }
+
+    public void run()
+    {
+
     }
 }
