@@ -44,7 +44,7 @@ public class Renderer extends Canvas
      * Do not run this, make a PhysicsSimulator instead.
      * @param delta NaN
      */
-    public void start(double detla)
+    public void start(double delta)
     {
     
     }
@@ -63,6 +63,11 @@ public class Renderer extends Canvas
      * @param delta set on a constant tickrate set by PhysicsSmulator as 64.
      */
     public void fixedUpdate(double delta)
+    {
+    
+    }
+    
+    public void lateUpdate(double delta)
     {
     
     }
