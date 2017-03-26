@@ -14,6 +14,7 @@ public class PhysicsSimulator implements Runnable
     private volatile Thread thread;
     private volatile double delta;
     private volatile Renderer renderer;
+    private boolean displayInfo;
     
     /**
      * Initializes a PhysicsSimulator object with Renderer.DEFAULT_RENDERER
@@ -34,6 +35,7 @@ public class PhysicsSimulator implements Runnable
     
     private void init(Renderer renderer)
     {
+        displayInfo = false;
         running = false;
         delta = 0f;
         this.renderer = renderer;
@@ -49,6 +51,11 @@ public class PhysicsSimulator implements Runnable
     public double getDelta()
     {
         return delta;
+    }
+    
+    public void setDisplayInfo(boolean displayInfo)
+    {
+        this.displayInfo = displayInfo;
     }
     
     /**
@@ -102,13 +109,16 @@ public class PhysicsSimulator implements Runnable
         
         if(running)
         {
-            // Start rendering
+            // Start updating
             
             renderer.start(Double.NaN, time, frames);
+            
+            // Stop updating and start rendering
             
             renderer.render();
             
             // Stop rendering
+            
             frames++;
             now = System.currentTimeMillis();
             millisCounter += now - lastTime;
@@ -120,7 +130,7 @@ public class PhysicsSimulator implements Runnable
         
         while(running)
         {
-            // Start rendering
+            // Start updating
             
             renderer.update(delta, time, frames);
             
@@ -132,7 +142,7 @@ public class PhysicsSimulator implements Runnable
             
             renderer.lateUpdate(delta, time, frames);
             
-            // Stop rendering
+            // Stop updating
             
             renderer.render();
             
@@ -147,7 +157,8 @@ public class PhysicsSimulator implements Runnable
             if(millisCounter >= MILLIS_PER_SECOND)
             {
                 millisCounter -= MILLIS_PER_SECOND;
-                System.out.println(delta + ", " + (1000 / delta) + ", " + frames);
+                if(displayInfo)
+                    System.out.println(delta + ", " + (1 / delta) + ", " + frames);
             }
         }
     }
