@@ -16,7 +16,7 @@ public class SceneObject
     protected ArrayList<Point2D.Float> vertices = new ArrayList<>();
     protected Point2D.Float origin;
     protected ArrayList<Component> components = new ArrayList<>();
-    protected float xScale, yScale = 1f;
+    protected float xScale = 1f, yScale = 1f;
     protected boolean hasPhysics = true;
 
     private Vector2 velocity = new Vector2(0, 0);

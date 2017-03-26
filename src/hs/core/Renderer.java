@@ -15,7 +15,7 @@ import java.util.ArrayList;
  */
 public class Renderer extends Canvas
 {
-    public static final Renderer DEFAULT_RENDERER = new Renderer();
+    public static final Renderer DEFAULT_RENDERER = new Renderer(Scene.DEMO_SCENE);
     public static final int DEFAULT_WIDTH = 1280;
     public static final int DEFAULT_HEIGHT = 1280;
     
@@ -211,16 +211,28 @@ public class Renderer extends Canvas
             ArrayList<Point2D.Float> p2D = so.getVertices();
             Point2D.Float origin = so.getOrigin();
         
-            for(int i = 0; i < p2D.size() - 1; i++)
+            for(int i = 0; i < p2D.size(); i++)
             {
-                float x0 = origin.x + p2D.get(i).x;
-                float y0 = origin.y + p2D.get(i).y;
-                float x1 = origin.x + p2D.get(i + 1).x;
-                float y1 = origin.y + p2D.get(i + 1).y;
+                float x0, y0, x1, y1;
+                if(i == p2D.size() - 1)
+                {
+                    x0 = origin.x + p2D.get(i).x;
+                    y0 = origin.y + p2D.get(i).y;
+                    x1 = origin.x + p2D.get(0).x;
+                    y1 = origin.y + p2D.get(0).y;
+                }
+                else
+                {
+                    x0 = origin.x + p2D.get(i).x;
+                    y0 = origin.y + p2D.get(i).y;
+                    x1 = origin.x + p2D.get(i + 1).x;
+                    y1 = origin.y + p2D.get(i + 1).y;
+                }
                 
-                System.out.println(x0 + ", " + y0 + "\t" + x1 + ", " + y1);
+                //System.out.println(x0 + ", " + y0 + "\t" + x1 + ", " + y1);
                 drawLine(x0, y0, x1, y1);
             }
+            System.out.println();
         }
     }
 
