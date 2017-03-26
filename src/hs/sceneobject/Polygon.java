@@ -7,6 +7,7 @@ import hs.physics.Vector2;
  */
 public class Polygon extends SceneObject
 {
+    private int numSides;
 
     public Polygon(Vector2 gravity)
     {
@@ -14,6 +15,11 @@ public class Polygon extends SceneObject
     }
 
     public Polygon(Vector2 gravity, int xScale, int yScale)
+    {
+        super(gravity, xScale, yScale);
+    }
+
+    public Polygon(Vector2 gravity, int numSides, int xScale, int yScale)
     {
         super(gravity, xScale, yScale);
     }
