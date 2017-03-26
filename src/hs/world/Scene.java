@@ -52,6 +52,11 @@ public class Scene
         return yBound;
     }
 
+    public ArrayList<SceneObject> getSceneObjects()
+    {
+        return sceneObjects;
+    }
+
     public void add(SceneObject ... sceneObjects)
     {
         for(SceneObject so : sceneObjects)
