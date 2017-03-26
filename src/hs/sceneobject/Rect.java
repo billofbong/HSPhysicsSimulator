@@ -19,13 +19,16 @@ public class Rect extends Polygon
         addVertices();
     }
 
-    public Rect(Vector2 gravity, Point2D.Float origin, int xScale, int yScale)
+    public Rect(Vector2 gravity, Point2D.Float origin, float xScale, float yScale)
     {
         super(gravity, origin, xScale, yScale);
+
+        System.out.println(gravity);
+
         addVertices();
     }
 
-    public Rect(Vector2 gravity, Point2D.Float origin, int xScale, int yScale, boolean hasPhysics, int numSides)
+    public Rect(Vector2 gravity, Point2D.Float origin, float xScale, float yScale, boolean hasPhysics, int numSides)
     {
         super(gravity, origin, xScale, yScale, hasPhysics, numSides);
         addVertices();

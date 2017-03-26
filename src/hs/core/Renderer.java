@@ -103,7 +103,7 @@ public class Renderer extends Canvas
      */
     public void fixedUpdate(double delta, double time, long frames)
     {
-    
+        referenceScene.updateAllSceneObjects(delta, time, frames);
     }
     
     /**
@@ -232,7 +232,6 @@ public class Renderer extends Canvas
                 //System.out.println(x0 + ", " + y0 + "\t" + x1 + ", " + y1);
                 drawLine(x0, y0, x1, y1);
             }
-            System.out.println();
         }
     }
 
@@ -256,7 +255,7 @@ public class Renderer extends Canvas
         return (int) ((height - 1) * ((Math.abs(cy - yBound)) / (2 * yBound)));
     }
     /**
-     * This is called after when all the updates have ran and it will update the screen.
+     * This is called after when all the updates have ran and it will updatePhysics the screen.
      */
     public void render()
     {

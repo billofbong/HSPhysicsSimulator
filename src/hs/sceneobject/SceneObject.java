@@ -16,10 +16,10 @@ public class SceneObject
     protected ArrayList<Point2D.Float> vertices = new ArrayList<>();
     protected Point2D.Float origin;
     protected ArrayList<Component> components = new ArrayList<>();
-    protected float xScale = 1f, yScale = 1f;
+    protected float xScale = .1f, yScale = .1f;
     protected boolean hasPhysics = true;
 
-    private Vector2 velocity = new Vector2(0, 0);
+    protected Vector2 velocity = new Vector2(0, 0);
 
     /**
      *
@@ -29,6 +29,7 @@ public class SceneObject
     {
         this.gravity = gravity;
         this.origin = origin;
+
     }
 
     /**
@@ -37,15 +38,18 @@ public class SceneObject
      * @param xScale the scaling of the object on the x-axis
      * @param yScale the scaling of the object on the y-axis
      */
-    public SceneObject(Vector2 gravity, Point2D.Float origin, int xScale, int yScale)
+    public SceneObject(Vector2 gravity, Point2D.Float origin, float xScale, float yScale)
     {
         this.gravity = gravity;
         this.origin = origin;
         this.xScale = xScale;
         this.yScale = yScale;
+
+
+        System.out.println(this.gravity);
     }
 
-    public SceneObject(Vector2 gravity, Point2D.Float origin, int xScale, int yScale, boolean hasPhysics)
+    public SceneObject(Vector2 gravity, Point2D.Float origin, float xScale, float yScale, boolean hasPhysics)
     {
         this.gravity = gravity;
         this.origin = origin;
@@ -56,12 +60,18 @@ public class SceneObject
 
     /**
      *
-     * @param deltaTime
+     * @param delta
+     * @param frames
+     * @param time
      */
-    public void update(double deltaTime)
+    public void updatePhysics(double delta, double time, long frames)
     {
         velocity.add(gravity);
-        gravity.multiply((float) deltaTime);
+        //System.out.println(gravity);
+        gravity.multiply((float) delta);
+
+        origin.x += velocity.getX();
+        origin.y += velocity.getY();
     }
 
     /**
