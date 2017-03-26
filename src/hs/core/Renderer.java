@@ -84,6 +84,7 @@ public class Renderer extends Canvas
     public void update(double delta, double time, long frames)
     {
         //drawLine(-1f, -1f, 1f, 1f);
+        drawShapes(referenceScene.getSceneObjects());
     }
     
     /**
@@ -94,7 +95,7 @@ public class Renderer extends Canvas
      */
     public void fixedUpdate(double delta, double time, long frames)
     {
-        drawShapes(referenceScene.getSceneObjects());
+    
     }
     
     /**

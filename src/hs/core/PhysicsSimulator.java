@@ -24,7 +24,7 @@ public class PhysicsSimulator implements Runnable
      */
     public PhysicsSimulator()
     {
-        init(Renderer.DEFAULT_RENDERER, Scene.DEFAULT_SCENE);
+        init(Renderer.DEFAULT_RENDERER, Scene.DEMO_SCENE);
     }
     
     /**
