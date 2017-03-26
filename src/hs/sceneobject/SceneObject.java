@@ -73,8 +73,9 @@ public class SceneObject
         //System.out.println(gravity);
         gravity.multiply((float) delta);
 
-        origin.x += velocity.getX();
-        origin.y += velocity.getY();
+        //addToOrigin((float) (.5 * Math.cos(time)), (float) (.5 * Math.sin(time)));
+        //origin.x += velocity.getX();
+        //origin.y += velocity.getY();
     }
 
     /**
