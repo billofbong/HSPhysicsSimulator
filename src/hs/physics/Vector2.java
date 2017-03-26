@@ -42,6 +42,12 @@ public class Vector2
         setY(this.getX() + v2.getY());
     }
 
+    public void add(float v2)
+    {
+        setX(this.getX() + v2);
+        setY(this.getX() + v2);
+    }
+
     public static Vector2 createAddedVector(Vector2 ... vector2s)
     {
         Vector2 finalVector = new Vector2(0 ,0);
@@ -60,6 +66,12 @@ public class Vector2
         setY(this.getX() * v2.getY());
     }
 
+    public void multiply(float v2)
+    {
+        setX(this.getX() * v2);
+        setY(this.getX() * v2);
+    }
+
     public static Vector2 createMultipliedVector(Vector2 ... vector2s)
     {
         Vector2 finalVector = new Vector2(0 ,0);
@@ -71,7 +83,6 @@ public class Vector2
 
         return finalVector;
     }
-
     @Override
     public String toString()
     {
