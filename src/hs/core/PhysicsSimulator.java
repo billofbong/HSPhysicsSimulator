@@ -13,7 +13,7 @@ public class PhysicsSimulator implements Runnable
     private volatile boolean running;
     private volatile Thread thread;
     private volatile double delta;
-    private Renderer renderer;
+    private volatile Renderer renderer;
     
     /**
      * Initializes a PhysicsSimulator object with Renderer.DEFAULT_RENDERER
@@ -89,7 +89,7 @@ public class PhysicsSimulator implements Runnable
             
             // Stop rendering
             now = System.currentTimeMillis();
-            delta =  timeCounter / MILLIS_PER_SECOND;
+            delta =  ((double) now - lastTime) / MILLIS_PER_SECOND;
             lastTime = now;
             timeCounter += delta;
             time += delta;
@@ -112,6 +112,7 @@ public class PhysicsSimulator implements Runnable
             // Stop rendering
             
             renderer.render();
+            System.out.println(1000 / delta);
     
             now = System.currentTimeMillis();
             delta = ((double) now - lastTime) / MILLIS_PER_SECOND;

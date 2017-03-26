@@ -56,7 +56,7 @@ public class Renderer extends Canvas
     {
         for(int i = 0; i < updatePixels.length; i++)
         {
-            updatePixels[i] = (int) (1000 * i * delta);
+            updatePixels[i] = (int) (i + 60 * time);
         }
     }
     
