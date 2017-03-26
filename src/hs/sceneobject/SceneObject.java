@@ -1,7 +1,9 @@
 package hs.sceneobject;
 
+import hs.core.PhysicsSimulator;
 import hs.physics.Vector2;
 import hs.sceneobject.component.Component;
+import hs.world.Scene;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -72,6 +74,12 @@ public class SceneObject
         velocity.add(gravity);
         //System.out.println(gravity);
         gravity.multiply((float) delta);
+
+        for(Point2D.Float v : getVertices())
+        {
+            if(v.getY() <= Scene.Y_BOUND || v.getY() >= Scene.Y_BOUND || v.getX() <= Scene.X_BOUND || v.getX() >= Scene.X_BOUND)ß
+                this.origin = new Point2D.Float(0, 0);
+        }
 
         //addToOrigin((float) (.5 * Math.cos(time)), (float) (.5 * Math.sin(time)));
         //origin.x += velocity.getX();

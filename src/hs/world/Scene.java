@@ -17,6 +17,9 @@ public class Scene
 
     public static final Scene DEMO_SCENE;
 
+    public static final double X_BOUND = 1;
+    public static final double Y_BOUND = 1;
+
     static
     {
          DEMO_SCENE = new Scene(1);

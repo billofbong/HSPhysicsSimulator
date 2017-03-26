@@ -254,6 +254,7 @@ public class Renderer extends Canvas
         //return (int) (height/2 - cy);
         return (int) ((height - 1) * ((Math.abs(cy - yBound)) / (2 * yBound)));
     }
+
     /**
      * This is called after when all the updates have ran and it will updatePhysics the screen.
      */
