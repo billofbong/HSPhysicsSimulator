@@ -145,7 +145,8 @@ public class PhysicsSimulator implements Runnable
         while(running)
         {
             // Start updating
-            
+
+
             renderer.update(delta, time, frames);
             
             if(timeCounter >= SECONDS_PER_TICK)
@@ -167,7 +168,7 @@ public class PhysicsSimulator implements Runnable
             lastTime = now;
             timeCounter += delta;
             time += delta;
-            
+
             if(millisCounter >= MILLIS_PER_SECOND)
             {
                 millisCounter -= MILLIS_PER_SECOND;

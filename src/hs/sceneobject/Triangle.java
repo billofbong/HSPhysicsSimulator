@@ -15,12 +15,12 @@ public class Triangle extends Polygon
         super(gravity, origin);
     }
 
-    public Triangle(Vector2 gravity, Point2D.Float origin, int xScale, int yScale)
+    public Triangle(Vector2 gravity, Point2D.Float origin, float xScale, float yScale)
     {
         super(gravity, origin, xScale, yScale);
     }
 
-    public Triangle(Vector2 gravity, Point2D.Float origin, int xScale, int yScale, boolean hasPhysics, int numSides)
+    public Triangle(Vector2 gravity, Point2D.Float origin, float xScale, float yScale, boolean hasPhysics, int numSides)
     {
         super(gravity, origin, xScale, yScale, hasPhysics, numSides);
     }
