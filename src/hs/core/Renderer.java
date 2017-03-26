@@ -83,7 +83,7 @@ public class Renderer extends Canvas
      */
     public void update(double delta, double time, long frames)
     {
-        drawLine(-1f, -1f, 1f, 1f);
+        //drawLine(-1f, -1f, 1f, 1f);
     }
     
     /**
@@ -94,7 +94,7 @@ public class Renderer extends Canvas
      */
     public void fixedUpdate(double delta, double time, long frames)
     {
-    
+        drawShapes(referenceScene.getSceneObjects());
     }
     
     /**
@@ -174,19 +174,21 @@ public class Renderer extends Canvas
             {
                 drawLine(origin.x + p2D.get(i).x, origin.y + p2D.get(i).y, origin.x + p2D.get(i + 1).x, origin.y + p2D.get(i + 1).y);
             }
-            
         }
     }
     
-    protected void drawShape(SceneObject so)
+    protected void drawShapes(ArrayList<SceneObject> sceneObjects)
     {
+        for(SceneObject so : sceneObjects)
+        {
             ArrayList<Point2D.Float> p2D = so.getVertices();
             Point2D.Float origin = so.getOrigin();
-            
+        
             for(int i = 0; i < p2D.size() - 1; i++)
             {
                 drawLine(origin.x + p2D.get(i).x, origin.y + p2D.get(i).y, origin.x + p2D.get(i + 1).x, origin.y + p2D.get(i + 1).y);
             }
+        }
     }
 
     private void plot(int x, int y, int color)
