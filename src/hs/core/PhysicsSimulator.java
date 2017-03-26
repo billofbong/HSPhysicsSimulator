@@ -14,10 +14,22 @@ public class PhysicsSimulator implements Runnable
     private volatile Thread thread;
     private volatile double delta;
     private Renderer renderer;
-
+    
+    /**
+     * Initializes a PhysicsSimulator object with Renderer.DEFAULT_RENDERER
+     */
     public PhysicsSimulator()
     {
         init(Renderer.DEFAULT_RENDERER);
+    }
+    
+    /**
+     * Initializes a PhysicsSimulator object with Renderer.DEFAULT_RENDERER
+     * @param renderer
+     */
+    public PhysicsSimulator(Renderer renderer)
+    {
+        init(renderer);
     }
     
     private void init(Renderer renderer)
@@ -27,7 +39,7 @@ public class PhysicsSimulator implements Runnable
         this.renderer = renderer;
         thread = new Thread(this);
         thread.setName("Main rendering Thread");
-        thread.setPriority(8);
+        thread.setPriority(10);
     }
 
     public synchronized void start()
