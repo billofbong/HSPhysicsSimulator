@@ -77,7 +77,11 @@ public class PhysicsSimulator implements Runnable
         double time = 0f;
         if(running)
         {
+            // Start rendering
+            
             renderer.start(Double.NaN);
+            
+            // Stop rendering
             now = System.currentTimeMillis();
             delta = ((double) now - lastTime) / MILLIS_PER_SECOND;
             lastTime = now;
@@ -86,11 +90,11 @@ public class PhysicsSimulator implements Runnable
         
         while(running)
         {
-            // Start renderering
+            // Start rendering
             
             renderer.update(delta);
             
-            // Stop renderering
+            // Stop rendering
     
             now = System.currentTimeMillis();
             delta = ((double) now - lastTime) / MILLIS_PER_SECOND;
