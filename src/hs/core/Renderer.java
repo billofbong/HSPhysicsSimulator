@@ -84,6 +84,8 @@ public class Renderer extends Canvas
     public void update(double delta, double time, long frames)
     {
         //drawLine(-1f, -1f, 1f, 1f);
+        //drawLine(1f, -1f, -1f, 1f);
+        //drawLine(-.5f, -.25f, .5f, .5f);
         drawShapes(referenceScene.getSceneObjects());
     }
     
@@ -128,6 +130,11 @@ public class Renderer extends Canvas
      */
     protected void drawLine(float x0, float y0, float x1, float y1)
     {
+        if(x0 > x1)
+        {
+            drawLine(x1, y1, x0, y0);
+            return;
+        }
         x0 = xCoordToPixel(x0);
         x1 = xCoordToPixel(x1);
         y0 = yCoordToPixel(y0);
@@ -135,32 +142,51 @@ public class Renderer extends Canvas
 
         //System.out.println("(" + x0 + ", " + y0 + ") (" + x1 + ", " + y1 + ")");
 
-        float deltaX = Math.abs(x1 - x0);
-        float deltaY = Math.abs(y1 - y0);
+        float deltaX = x1 - x0;
+        float deltaY = y0 - y1;
 
         if(deltaX != 0)
         {
-            float deltaErr = Math.abs(deltaY / deltaX);
-            //System.out.println(deltaY / deltaX);
-            float error = deltaErr - 0.5f;
-            int y = (int) y0;
-
-            for(float x = x0; x <= x1; x++)
+            if(deltaY >= 0)
             {
-                //plot
-                //System.out.println(x + ", " + y);
-                plot((int) x, y, 0xffffff);
-                error += deltaErr;
-                if(error >= 0.5)
+                float deltaErr = deltaY / deltaX;
+                //System.out.println(deltaY / deltaX);
+                float error = deltaErr - 0.5f;
+                int y = (int) y0;
+    
+                for(float x = x0; x <= x1; x++)
                 {
-                    y -= 1;
-                    error -= 1;
+                    //plot
+                    //System.out.println(x + ", " + y);
+                    plot((int) x, y, 0xffffff);
+                    error += deltaErr;
+                    if(error >= 0.5)
+                    {
+                        y -= 1;
+                        error -= 1;
+                    }
                 }
             }
-        }
-        else
-        {
-
+            else
+            {
+                float deltaErr = deltaY / deltaX;
+                //System.out.println(deltaY / deltaX);
+                float error = deltaErr - 0.5f;
+                int y = (int) y0;
+    
+                for(float x = x0; x <= x1; x++)
+                {
+                    //plot
+                    //System.out.println(x + ", " + y);
+                    plot((int) x, y, 0xffffff);
+                    error -= deltaErr;
+                    if(error >= 0.5)
+                    {
+                        y += 1;
+                        error -= 1;
+                    }
+                }
+            }
         }
     }
     
