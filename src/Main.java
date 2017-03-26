@@ -17,7 +17,9 @@ public class Main
         
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.add(ps.getRenderer());
+        frame.setSize(1280, 1280);
         frame.pack();
+        frame.setLocationRelativeTo(null);
         frame.setVisible(true);
         ps.start();
     }

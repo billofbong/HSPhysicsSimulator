@@ -23,7 +23,7 @@ public class Renderer extends Canvas
     public Renderer()
     {
         width = 1280;
-        height = 720;
+        height = 1280;
         init(width, height, Scene.DEFAULT_SCENE);
     }
     
@@ -58,7 +58,9 @@ public class Renderer extends Canvas
      */
     public void start(double delta, double time, long frames)
     {
-    
+
+        //drawLine(-.5f, -.5f, .5f, .5f);
+        //drawLine(.5f, .5f, 1f, .5f);
     }
     
     /**
@@ -69,10 +71,7 @@ public class Renderer extends Canvas
      */
     public void update(double delta, double time, long frames)
     {
-        for(int i = 0; i < updatePixels.length; i++)
-        {
-            updatePixels[i] = (int) (0x00ff00 + frames + i);
-        }
+        drawLine(-1f, -1f, 1f, 1f);
     }
     
     /**
@@ -109,16 +108,68 @@ public class Renderer extends Canvas
     
     /**
      * Draws a line between point one and point two
-     * @param x1 vertex-1 x value
-     * @param y1 vertex-1 y value
-     * @param x2 vertex-2 x value
-     * @param y2 vertex-2 y value
+     * @param x0 vertex-1 x value
+     * @param y0 vertex-1 y value
+     * @param x1 vertex-2 x value
+     * @param y1 vertex-2 y value
      */
-    protected void drawLine(float x1, float y1, float x2, float y2)
+    protected void drawLine(float x0, float y0, float x1, float y1)
     {
-        
+        x0 = xCoordToPixel(x0);
+        x1 = xCoordToPixel(x1);
+        y0 = yCoordToPixel(y0);
+        y1 = yCoordToPixel(y1);
+
+        //System.out.println("(" + x0 + ", " + y0 + ") (" + x1 + ", " + y1 + ")");
+
+        float deltaX = Math.abs(x1 - x0);
+        float deltaY = Math.abs(y1 - y0);
+
+        if(deltaX != 0)
+        {
+            float deltaErr = Math.abs(deltaY / deltaX);
+            //System.out.println(deltaY / deltaX);
+            float error = deltaErr - 0.5f;
+            int y = (int) y0;
+
+            for(float x = x0; x <= x1; x++)
+            {
+                //plot
+                //System.out.println(x + ", " + y);
+                plot((int) x, y, 0xffffff);
+                error += deltaErr;
+                if(error >= 0.5)
+                {
+                    y -= 1;
+                    error -= 1;
+                }
+            }
+        }
+        else
+        {
+
+        }
     }
-    
+
+    private void plot(int x, int y, int color)
+    {
+        updatePixels[x + y * width] = color;
+    }
+
+    protected int xCoordToPixel(float cx)
+    {
+        double xBound = referenceScene.getXBound();
+        return (int) ((width - 1) * ((cx + xBound) / 2 * xBound));
+
+    }
+
+    protected int yCoordToPixel(float cy)
+    {
+        double yBound = referenceScene.getYBound();
+        //return (int) ((height - 1) * (Math.abs(cy - yBound) / (2 * yBound)));
+        //return (int) (height/2 - cy);
+        return (int) ((height - 1) * ((Math.abs(cy - yBound)) / (2 * yBound)));
+    }
     /**
      * This is called after when all the updates have ran and it will update the screen.
      */
@@ -142,5 +193,20 @@ public class Renderer extends Canvas
         
         g.dispose();
         bs.show();
+
+        reset(0);
+    }
+
+    public void reset(int color)
+    {
+        for(int i = 0; i < updatePixels.length; i++)
+        {
+            updatePixels[i] = color;
+        }
+
+        for(int i = 0; i < pixels.length; i++)
+        {
+            pixels[i] = color;
+        }
     }
 }
