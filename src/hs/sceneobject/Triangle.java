@@ -17,4 +17,9 @@ public class Triangle extends Polygon
     {
         super(gravity, xScale, yScale);
     }
+
+    public Triangle(Vector2 gravity, int xScale, int yScale, boolean hasPhysics, int numSides)
+    {
+        super(gravity, xScale, yScale, hasPhysics, numSides);
+    }
 }
