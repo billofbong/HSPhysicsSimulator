@@ -24,6 +24,7 @@ public class Renderer extends Canvas
     private int updatePixels[];
     private final int width, height;
     private Scene referenceScene;
+    private boolean reset;
     
     public Renderer()
     {
@@ -56,10 +57,16 @@ public class Renderer extends Canvas
     private void init(int width, int height, Scene referenceScene)
     {
         setSize(width, height);
+        reset = true;
         this.referenceScene = referenceScene;
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
         updatePixels = new int[pixels.length];
+    }
+    
+    public void setReset(boolean doReset)
+    {
+        reset = doReset;
     }
     
     /**
@@ -92,7 +99,7 @@ public class Renderer extends Canvas
         //drawLine(.5f, -.5f, -.5f, -.5f);
         //drawLine(-.5f, -.5f, -.5f, .5f);
         
-        drawShapes(referenceScene.getSceneObjects());
+        
     }
     
     /**
@@ -104,6 +111,7 @@ public class Renderer extends Canvas
     public void fixedUpdate(double delta, double time, long frames)
     {
         referenceScene.updateAllSceneObjects(delta, time, frames);
+        drawShapes(referenceScene.getSceneObjects());
     }
     
     /**
@@ -278,8 +286,9 @@ public class Renderer extends Canvas
         
         g.dispose();
         bs.show();
-
-        reset(0x000000);
+        
+        if(reset)
+            reset(0x000000);
     }
 
     public void reset(int color)

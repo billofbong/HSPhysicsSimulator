@@ -16,7 +16,7 @@ public class SceneObject
 {
 
     public static final Vector2 DEFAULT_GRAVITY = new Vector2(0, -.1f);
-    private Vector2 gravity;
+    protected Vector2 gravity;
     protected ArrayList<Point2D.Float> vertices = new ArrayList<>();
     protected Point2D.Float origin;
     protected ArrayList<Component> components = new ArrayList<>();
@@ -51,7 +51,7 @@ public class SceneObject
         this.yScale = yScale;
         velocity = new Vector2(0f, 0f);
 
-        System.out.println(this.gravity);
+        //System.out.println(this.gravity);
     }
 
     public SceneObject(Vector2 gravity, Point2D.Float origin, float xScale, float yScale, boolean hasPhysics)
@@ -74,7 +74,7 @@ public class SceneObject
     {
         velocity.add(DEFAULT_GRAVITY);
         gravity.multiply((float) delta);
-        System.out.println(velocity);
+        //System.out.println(velocity);
         for(Point2D.Float v : getVertices())
         {
             if(v.getY() <= -Scene.Y_BOUND || v.getY() >= Scene.Y_BOUND || v.getX() <= -Scene.X_BOUND || v.getX() >= Scene.X_BOUND)
@@ -83,7 +83,7 @@ public class SceneObject
 
         addToOrigin(velocity.getX(), velocity.getY());
 
-        //addToOrigin((float) (.5 * Math.cos(time)), (float) (.5 * Math.sin(time)));
+        addToOrigin((float) (.5 * Math.cos(time)), (float) (.5 * Math.sin(time)));
         //origin.x += velocity.getX();
         //origin.y += velocity.getY();
     }

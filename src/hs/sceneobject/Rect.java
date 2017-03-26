@@ -25,11 +25,19 @@ public class Rect extends Polygon
     public Rect(Vector2 gravity, Point2D.Float origin, float xScale, float yScale)
     {
         super(gravity, origin, xScale, yScale);
-    
+        
+        /*
         vertices.add(new Point2D.Float(-xScale, yScale));
         vertices.add(new Point2D.Float(xScale, yScale));
         vertices.add(new Point2D.Float(xScale, -yScale));
         vertices.add(new Point2D.Float(-xScale, -yScale));
+        //*/
+        
+        /*
+        vertices.add(new Point2D.Float(0, yScale));
+        vertices.add(new Point2D.Float(xScale / 2, yScale / 2));
+        vertices.add(new Point2D.Float(-xScale / 2, yScale / 2));
+        //*/
     }
 
     public Rect(Vector2 gravity, Point2D.Float origin, float xScale, float yScale, boolean hasPhysics, int numSides)
