@@ -41,6 +41,11 @@ public class PhysicsSimulator implements Runnable
         thread.setName("Main rendering Thread");
         thread.setPriority(10);
     }
+    
+    public Renderer getRenderer()
+    {
+        return renderer;
+    }
 
     public synchronized void start()
     {
@@ -70,21 +75,23 @@ public class PhysicsSimulator implements Runnable
     public void run()
     {
         final int MILLIS_PER_SECOND = 1000;
-        final double MILLIS_PER_TICK = (double) 1000 / TICK_RATE;
-        double tickCount = 0f;
+        final double SECONDS_PER_TICK = (double) 1 / TICK_RATE;
         long lastTime = System.currentTimeMillis();
+        double timeCounter = 0;
+        long fixedUpdateCounter = 0;
         long now;
         double time = 0f;
         if(running)
         {
             // Start rendering
             
-            renderer.start(Double.NaN);
+            renderer.start(Double.NaN, time);
             
             // Stop rendering
             now = System.currentTimeMillis();
-            delta = ((double) now - lastTime) / MILLIS_PER_SECOND;
+            delta =  timeCounter / MILLIS_PER_SECOND;
             lastTime = now;
+            timeCounter += delta;
             time += delta;
         }
         
@@ -92,9 +99,19 @@ public class PhysicsSimulator implements Runnable
         {
             // Start rendering
             
-            renderer.update(delta);
+            renderer.update(delta, time);
+            
+            if(timeCounter >= SECONDS_PER_TICK)
+            {
+                renderer.fixedUpdate(SECONDS_PER_TICK, SECONDS_PER_TICK * ++fixedUpdateCounter);
+                timeCounter -= SECONDS_PER_TICK;
+            }
+            
+            renderer.lateUpdate(delta, time);
             
             // Stop rendering
+            
+            renderer.render();
     
             now = System.currentTimeMillis();
             delta = ((double) now - lastTime) / MILLIS_PER_SECOND;
