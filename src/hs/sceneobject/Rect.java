@@ -33,9 +33,9 @@ public class Rect extends Polygon
 
     private void addVertices()
     {
-        vertices.add(new Point2D.Float(origin.x + xScale, origin.y + yScale));
-        vertices.add(new Point2D.Float(origin.x - xScale, origin.y + yScale));
-        vertices.add(new Point2D.Float(origin.x + xScale, origin.y - yScale));
-        vertices.add(new Point2D.Float(origin.x - xScale, origin.y - yScale));
+        vertices.add(new Point2D.Float(xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, yScale));
+        vertices.add(new Point2D.Float(xScale, yScale));
     }
 }
