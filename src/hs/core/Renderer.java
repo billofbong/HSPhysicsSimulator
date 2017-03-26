@@ -1,5 +1,7 @@
 package hs.core;
 
+import hs.world.Scene;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -16,24 +18,33 @@ public class Renderer extends Canvas
     private int pixels[];
     private int updatePixels[];
     private final int width, height;
+    private Scene referenceScene;
     
     public Renderer()
     {
-        width = 1200;
+        width = 1280;
         height = 720;
-        init(width, height);
+        init(width, height, Scene.DEFAULT_SCENE);
     }
     
     public Renderer(int width, int height)
     {
         this.width = width;
         this.height = height;
-        init(width, height);
+        init(width, height, Scene.DEFAULT_SCENE);
     }
     
-    private void init(int width, int height)
+    public Renderer(int width, int height, Scene referenceScene)
+    {
+        this.width = width;
+        this.height = height;
+        init(width, height, referenceScene);
+    }
+    
+    private void init(int width, int height, Scene referenceScene)
     {
         setSize(width, height);
+        this.referenceScene = referenceScene;
         image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
         updatePixels = new int[pixels.length];
@@ -60,7 +71,7 @@ public class Renderer extends Canvas
     {
         for(int i = 0; i < updatePixels.length; i++)
         {
-            updatePixels[i] = (int) (0x00ff00 + frames);
+            updatePixels[i] = (int) (0x00ff00 + frames + i);
         }
     }
     
@@ -96,9 +107,16 @@ public class Renderer extends Canvas
         }
     }
     
+    /**
+     * Draws a line between point one and point two
+     * @param x1 vertex-1 x value
+     * @param y1 vertex-1 y value
+     * @param x2 vertex-2 x value
+     * @param y2 vertex-2 y value
+     */
     protected void drawLine(float x1, float y1, float x2, float y2)
     {
-    
+        
     }
     
     /**
@@ -111,7 +129,7 @@ public class Renderer extends Canvas
         
         if(bs == null)
         {
-            createBufferStrategy(3);
+            createBufferStrategy(2);
             return;
         }
         

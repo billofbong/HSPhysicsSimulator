@@ -10,7 +10,8 @@ import java.util.ArrayList;
  */
 public class Scene
 {
-
+    public static final Scene DEFAULT_SCENE = new Scene(1200);
+    
     private ArrayList<SceneObject> sceneObjects;
     private double xBound, yBound;
 
@@ -39,6 +40,16 @@ public class Scene
         this.sceneObjects = sceneObjects;
         this.xBound = xBound;
         this.yBound = yBound;
+    }
+    
+    public double getXBound()
+    {
+        return xBound;
+    }
+    
+    public double getYBound()
+    {
+        return yBound;
     }
 
     public void add(SceneObject ... sceneObjects)
