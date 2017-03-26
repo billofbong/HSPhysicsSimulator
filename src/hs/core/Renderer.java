@@ -60,7 +60,7 @@ public class Renderer extends Canvas
     {
         for(int i = 0; i < updatePixels.length; i++)
         {
-            updatePixels[i] = (int) (i + 60 * time);
+            updatePixels[i] = (int) (0x00ff00 + frames);
         }
     }
     
@@ -94,6 +94,11 @@ public class Renderer extends Canvas
         {
             pixels[i] = updatePixels[i];
         }
+    }
+    
+    protected void drawLine(float x1, float y1, float x2, float y2)
+    {
+    
     }
     
     /**
