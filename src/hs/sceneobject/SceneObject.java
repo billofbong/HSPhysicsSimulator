@@ -12,12 +12,12 @@ import java.util.ArrayList;
 public class SceneObject
 {
 
-    private Vector2 gravity;
-    private ArrayList<Point2D.Float> vertices = new ArrayList<>();
-    private Point2D.Float origin = new Point2D.Float();
-    private ArrayList<Component> components = new ArrayList<>();
-    private float xScale, yScale = 1;
-    private boolean hasPhysics = true;
+    protected Vector2 gravity;
+    protected ArrayList<Point2D.Float> vertices = new ArrayList<>();
+    protected Point2D.Float origin;
+    protected ArrayList<Component> components = new ArrayList<>();
+    protected float xScale, yScale = 1;
+    protected boolean hasPhysics = true;
 
     private Vector2 velocity = new Vector2(0, 0);
 
@@ -25,9 +25,10 @@ public class SceneObject
      *
      * @param gravity the gravity in units/sec^2 as a vector
      */
-    public SceneObject(Vector2 gravity)
+    public SceneObject(Vector2 gravity, Point2D.Float origin)
     {
         this.gravity = gravity;
+        this.origin = origin;
     }
 
     /**
@@ -36,16 +37,18 @@ public class SceneObject
      * @param xScale the scaling of the object on the x-axis
      * @param yScale the scaling of the object on the y-axis
      */
-    public SceneObject(Vector2 gravity, int xScale, int yScale)
+    public SceneObject(Vector2 gravity, Point2D.Float origin, int xScale, int yScale)
     {
         this.gravity = gravity;
+        this.origin = origin;
         this.xScale = xScale;
         this.yScale = yScale;
     }
 
-    public SceneObject(Vector2 gravity, int xScale, int yScale, boolean hasPhysics)
+    public SceneObject(Vector2 gravity, Point2D.Float origin, int xScale, int yScale, boolean hasPhysics)
     {
         this.gravity = gravity;
+        this.origin = origin;
         this.xScale = xScale;
         this.yScale = yScale;
         this.hasPhysics = hasPhysics;

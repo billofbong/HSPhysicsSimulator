@@ -2,24 +2,26 @@ package hs.sceneobject;
 
 import hs.physics.Vector2;
 
+import java.awt.geom.Point2D;
+
 /**
  * Created by hshack on 3/25/17.
  */
 public class Triangle extends Polygon
 {
 
-    public Triangle(Vector2 gravity)
+    public Triangle(Vector2 gravity, Point2D.Float origin)
     {
-        super(gravity);
+        super(gravity, origin);
     }
 
-    public Triangle(Vector2 gravity, int xScale, int yScale)
+    public Triangle(Vector2 gravity, Point2D.Float origin, int xScale, int yScale)
     {
-        super(gravity, xScale, yScale);
+        super(gravity, origin, xScale, yScale);
     }
 
-    public Triangle(Vector2 gravity, int xScale, int yScale, boolean hasPhysics, int numSides)
+    public Triangle(Vector2 gravity, Point2D.Float origin, int xScale, int yScale, boolean hasPhysics, int numSides)
     {
-        super(gravity, xScale, yScale, hasPhysics, numSides);
+        super(gravity, origin, xScale, yScale, hasPhysics, numSides);
     }
 }

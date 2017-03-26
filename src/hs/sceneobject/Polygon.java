@@ -2,6 +2,8 @@ package hs.sceneobject;
 
 import hs.physics.Vector2;
 
+import java.awt.geom.Point2D;
+
 /**
  * Created by hshack on 3/25/17.
  */
@@ -9,24 +11,24 @@ public class Polygon extends SceneObject
 {
     private int numSides;
 
-    public Polygon(Vector2 gravity)
+    public Polygon(Vector2 gravity, Point2D.Float origin)
     {
-        super(gravity);
+        super(gravity, origin);
     }
 
-    public Polygon(Vector2 gravity, int xScale, int yScale)
+    public Polygon(Vector2 gravity, Point2D.Float origin, int xScale, int yScale)
     {
-        super(gravity, xScale, yScale);
+        super(gravity, origin, xScale, yScale);
     }
 
-    public Polygon(Vector2 gravity, int numSides, int xScale, int yScale)
+    public Polygon(Vector2 gravity, Point2D.Float origin, int numSides, int xScale, int yScale)
     {
-        super(gravity, xScale, yScale);
+        super(gravity, origin, xScale, yScale);
     }
 
-    public Polygon(Vector2 gravity, int xScale, int yScale, boolean hasPhysics, int numSides)
+    public Polygon(Vector2 gravity, Point2D.Float origin, int xScale, int yScale, boolean hasPhysics, int numSides)
     {
-        super(gravity, xScale, yScale, hasPhysics);
+        super(gravity, origin, xScale, yScale, hasPhysics);
         this.numSides = numSides;
     }
 }
