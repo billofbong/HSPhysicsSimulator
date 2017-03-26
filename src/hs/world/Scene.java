@@ -1,7 +1,10 @@
 package hs.world;
 
+import hs.physics.Vector2;
+import hs.sceneobject.Rect;
 import hs.sceneobject.SceneObject;
 
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 /**
@@ -11,6 +14,14 @@ import java.util.ArrayList;
 public class Scene
 {
     public static final Scene DEFAULT_SCENE = new Scene(1);
+
+    public static final Scene DEMO_SCENE;
+
+    static
+    {
+         DEMO_SCENE = new Scene(1);
+         DEMO_SCENE.add(new Rect(new Vector2(0, -1), new Point2D.Float(0, 0)));
+    }
     
     private ArrayList<SceneObject> sceneObjects;
     private double xBound, yBound;
@@ -27,7 +38,7 @@ public class Scene
 
     public Scene(ArrayList<SceneObject> sceneObjects, double xBound)
     {
-        init(sceneObjects, xBound, xBound / 16 * 9);
+        init(sceneObjects, xBound, xBound);
     }
 
     public Scene(ArrayList<SceneObject> sceneObjects, double xBound, double yBound)
@@ -50,6 +61,11 @@ public class Scene
     public double getYBound()
     {
         return yBound;
+    }
+
+    public ArrayList<SceneObject> getSceneObjects()
+    {
+        return sceneObjects;
     }
 
     public void add(SceneObject ... sceneObjects)

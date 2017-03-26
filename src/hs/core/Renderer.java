@@ -1,18 +1,23 @@
 package hs.core;
 
+import hs.sceneobject.SceneObject;
 import hs.world.Scene;
 
 import java.awt.*;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.ArrayList;
 
 /**
  * @author Corbin Naderzad
  */
 public class Renderer extends Canvas
 {
-    public static final Renderer DEFAULT_RENDERER = new Renderer();
+    public static final Renderer DEFAULT_RENDERER = new Renderer(Scene.DEMO_SCENE);
+    public static final int DEFAULT_WIDTH = 1280;
+    public static final int DEFAULT_HEIGHT = 1280;
     
     private BufferedImage image;
     private int pixels[];
@@ -22,9 +27,16 @@ public class Renderer extends Canvas
     
     public Renderer()
     {
-        width = 1280;
-        height = 1280;
+        width = DEFAULT_WIDTH;
+        height = DEFAULT_HEIGHT;
         init(width, height, Scene.DEFAULT_SCENE);
+    }
+    
+    public Renderer(Scene referenceScene)
+    {
+        width = DEFAULT_WIDTH;
+        height = DEFAULT_HEIGHT;
+        init(width, height, referenceScene);
     }
     
     public Renderer(int width, int height)
@@ -71,7 +83,16 @@ public class Renderer extends Canvas
      */
     public void update(double delta, double time, long frames)
     {
-        drawLine(-1f, -1f, 1f, 1f);
+        //drawLine(-1f, -1f, 1f, 1f);
+        //drawLine(1f, -1f, -1f, 1f);
+        //drawLine(-.5f, -.25f, .5f, .5f);
+    
+        //drawLine(-.5f, .5f, .5f, .5f);
+        //drawLine(.5f, .5f, .5f, -.5f);
+        //drawLine(.5f, -.5f, -.5f, -.5f);
+        //drawLine(-.5f, -.5f, -.5f, .5f);
+        
+        drawShapes(referenceScene.getSceneObjects());
     }
     
     /**
@@ -115,6 +136,11 @@ public class Renderer extends Canvas
      */
     protected void drawLine(float x0, float y0, float x1, float y1)
     {
+        if(x0 > x1)
+        {
+            drawLine(x1, y1, x0, y0);
+            return;
+        }
         x0 = xCoordToPixel(x0);
         x1 = xCoordToPixel(x1);
         y0 = yCoordToPixel(y0);
@@ -122,32 +148,91 @@ public class Renderer extends Canvas
 
         //System.out.println("(" + x0 + ", " + y0 + ") (" + x1 + ", " + y1 + ")");
 
-        float deltaX = Math.abs(x1 - x0);
-        float deltaY = Math.abs(y1 - y0);
+        float deltaX = x1 - x0;
+        float deltaY = y0 - y1;
 
         if(deltaX != 0)
         {
-            float deltaErr = Math.abs(deltaY / deltaX);
-            //System.out.println(deltaY / deltaX);
-            float error = deltaErr - 0.5f;
-            int y = (int) y0;
-
-            for(float x = x0; x <= x1; x++)
+            if(deltaY >= 0)
             {
-                //plot
-                //System.out.println(x + ", " + y);
-                plot((int) x, y, 0xffffff);
-                error += deltaErr;
-                if(error >= 0.5)
+                float deltaErr = deltaY / deltaX;
+                //System.out.println(deltaY / deltaX);
+                float error = deltaErr - 0.5f;
+                int y = (int) y0;
+    
+                for(float x = x0; x <= x1; x++)
                 {
-                    y -= 1;
-                    error -= 1;
+                    //plot
+                    //System.out.println(x + ", " + y);
+                    plot((int) x, y, 0xffffff);
+                    error += deltaErr;
+                    if(error >= 0.5)
+                    {
+                        y -= 1;
+                        error -= 1;
+                    }
+                }
+            }
+            else
+            {
+                float deltaErr = deltaY / deltaX;
+                //System.out.println(deltaY / deltaX);
+                float error = deltaErr - 0.5f;
+                int y = (int) y0;
+    
+                for(float x = x0; x <= x1; x++)
+                {
+                    //plot
+                    //System.out.println(x + ", " + y);
+                    plot((int) x, y, 0xffffff);
+                    error -= deltaErr;
+                    if(error >= 0.5)
+                    {
+                        y += 1;
+                        error -= 1;
+                    }
                 }
             }
         }
         else
         {
-
+            for(int y = (int) Math.min(y0, y1); y <= Math.max(y0, y1); y++)
+            {
+                plot((int) x0, y, 0xffffff);
+            }
+        }
+    }
+    
+    protected void drawShapes(ArrayList<SceneObject> sceneObjects)
+    {
+        //System.out.println(sceneObjects.size());
+        for(SceneObject so : sceneObjects)
+        {
+            ArrayList<Point2D.Float> p2D = so.getVertices();
+            Point2D.Float origin = so.getOrigin();
+        
+            for(int i = 0; i < p2D.size(); i++)
+            {
+                float x0, y0, x1, y1;
+                if(i == p2D.size() - 1)
+                {
+                    x0 = origin.x + p2D.get(i).x;
+                    y0 = origin.y + p2D.get(i).y;
+                    x1 = origin.x + p2D.get(0).x;
+                    y1 = origin.y + p2D.get(0).y;
+                }
+                else
+                {
+                    x0 = origin.x + p2D.get(i).x;
+                    y0 = origin.y + p2D.get(i).y;
+                    x1 = origin.x + p2D.get(i + 1).x;
+                    y1 = origin.y + p2D.get(i + 1).y;
+                }
+                
+                //System.out.println(x0 + ", " + y0 + "\t" + x1 + ", " + y1);
+                drawLine(x0, y0, x1, y1);
+            }
+            System.out.println();
         }
     }
 
@@ -194,7 +279,7 @@ public class Renderer extends Canvas
         g.dispose();
         bs.show();
 
-        reset(0);
+        reset(0x000000);
     }
 
     public void reset(int color)
