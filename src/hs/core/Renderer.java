@@ -41,9 +41,11 @@ public class Renderer extends Canvas
     
     /**
      * Do not run this, make a PhysicsSimulator instead.
-     * @param delta NaN
+     * @param delta NaN, because a previous frame hasn't occurred.
+     * @param time 0, because no time has passed.
+     * @param frames 0, because no frames have been rendered.
      */
-    public void start(double delta, double time)
+    public void start(double delta, double time, long frames)
     {
     
     }
@@ -51,8 +53,10 @@ public class Renderer extends Canvas
     /**
      * Do not run this, make a PhysicsSimulator instead.
      * @param delta time since the last frame.
+     * @param time the amount of time that has passed since the PhysicsSimulator started.
+     * @param frames the amount of frames that have been rendered.
      */
-    public void update(double delta, double time)
+    public void update(double delta, double time, long frames)
     {
         for(int i = 0; i < updatePixels.length; i++)
         {
@@ -62,20 +66,28 @@ public class Renderer extends Canvas
     
     /**
      * Do not run this, make a PhysicsSimulator instead.
-     * @param delta set on a constant tickrate set by PhysicsSmulator as 64.
+     * @param delta set on a constant tickrate set by PhysicsSmulator as 64. This value should be equal to time / frames.
+     * @param time the amount of the time that has passed. This value should be equal to delta * frames.
+     * @param frames the amount of frames that have been rendered. This value should be equal to time / delta.
      */
-    public void fixedUpdate(double delta, double time)
+    public void fixedUpdate(double delta, double time, long frames)
     {
     
     }
     
-    public void lateUpdate(double delta, double time)
+    /**
+     * System.out.println(1000 / delta);
+     * @param delta time since the last frame.
+     * @param time the amount of time that has passed since the PhysicsSimulator started.
+     * @param frames the amount of frames that have been rendered.
+     */
+    public void lateUpdate(double delta, double time, long frames)
     {
     
     }
     
     
-    public void updatePixels()
+    protected void updatePixels()
     {
         
         for(int i = 0; i < pixels.length; i++)
