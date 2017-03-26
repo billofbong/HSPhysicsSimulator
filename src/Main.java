@@ -1,5 +1,9 @@
 import hs.core.PhysicsSimulator;
+import hs.physics.Vector2;
+import hs.sceneobject.Polygon;
+
 import javax.swing.JFrame;
+import java.awt.*;
 
 /**
  * @author Will Wright
