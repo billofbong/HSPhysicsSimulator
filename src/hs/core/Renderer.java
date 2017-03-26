@@ -1,39 +1,69 @@
 package hs.core;
-import hs.physics.Vector2;
+
+import java.awt.Canvas;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferInt;
 
 /**
  * @author Corbin Naderzad
- * @author Will Wright
  */
-public class Renderer implements Runnable
+public class Renderer extends Canvas
 {
-    private boolean running;
-    private Thread thread;
-
+    public static final Renderer DEFAULT_RENDERER;
+    
+    static
+    {
+        DEFAULT_RENDERER = new Renderer();
+    }
+    
+    private BufferedImage image;
+    private int pixels[];
+    private final int width, height;
+    
     public Renderer()
     {
-        running = false;
-        thread = new Thread(this);
-        thread.setName("Main renderering Thread");
-        thread.setPriority(8);
+        width = 1200;
+        height = 720;
+        init(width, height);
     }
-
-    public void start()
+    
+    public Renderer(int width, int height)
     {
-        if(!running)
-        {
-            running = true;
-
-        }
+        this.width = width;
+        this.height = height;
+        init(width, height);
     }
-
-    public void stop()
+    
+    private void init(int width, int height)
     {
-
+        image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+        pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
     }
-
-    public void run()
+    
+    /**
+     * Do not run this, make a PhysicsSimulator instead.
+     * @param delta NaN
+     */
+    public void start(double detla)
     {
-
+    
+    }
+    
+    /**
+     * Do not run this, make a PhysicsSimulator instead.
+     * @param delta time since the last frame.
+     */
+    public void update(double delta)
+    {
+    
+    }
+    
+    /**
+     * Do not run this, make a PhysicsSimulator instead.
+     * @param delta set on a constant tickrate set by PhysicsSmulator as 64.
+     */
+    public void fixedUpdate(double delta)
+    {
+    
     }
 }
