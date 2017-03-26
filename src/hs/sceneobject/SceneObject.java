@@ -14,7 +14,7 @@ public class SceneObject
 
     private Vector2 gravity;
     private ArrayList<Point2D.Float> vertices = new ArrayList<>();
-    private Point2D origin = new Point2D.Float();
+    private Point2D.Float origin = new Point2D.Float();
     private ArrayList<Component> components = new ArrayList<>();
     private float xScale, yScale = 1;
     private boolean hasPhysics = true;
@@ -74,7 +74,7 @@ public class SceneObject
      *
      * @return ArrayList of vertices
      */
-    public ArrayList<Point2D> getVertices()
+    public ArrayList<Point2D.Float> getVertices()
     {
         return vertices;
     }
@@ -92,7 +92,7 @@ public class SceneObject
      *
      * @return origin as Point2D
      */
-    public Point2D getOrigin()
+    public Point2D.Float getOrigin()
     {
         return origin;
     }

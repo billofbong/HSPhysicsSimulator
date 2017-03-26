@@ -7,5 +7,5 @@ import hs.sceneobject.Triangle;
  */
 public class Component
 {
-    Triangle t = new Triangle();
+    
 }
