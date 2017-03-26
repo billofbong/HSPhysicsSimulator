@@ -1,6 +1,7 @@
 package hs.sceneobject;
 
 import hs.physics.Vector2;
+import hs.sceneobject.component.Component;
 
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -12,12 +13,13 @@ public class SceneObject
 {
 
     private Vector2 gravity;
-    private ArrayList<Point2D> vertices = new ArrayList<>();
+    private ArrayList<Point2D.Float> vertices = new ArrayList<>();
     private Point2D origin = new Point2D.Float();
     private ArrayList<Component> components = new ArrayList<>();
     private float xScale, yScale = 1;
+    private boolean hasPhysics = true;
 
-    private Vector2 speed = new Vector2(0, 0);
+    private Vector2 velocity = new Vector2(0, 0);
 
     /**
      *
@@ -41,14 +43,22 @@ public class SceneObject
         this.yScale = yScale;
     }
 
+    public SceneObject(Vector2 gravity, int xScale, int yScale, boolean hasPhysics)
+    {
+        this.gravity = gravity;
+        this.xScale = xScale;
+        this.yScale = yScale;
+        this.hasPhysics = hasPhysics;
+    }
+
     /**
      *
      * @param deltaTime
      */
-    public void update(float deltaTime)
+    public void update(double deltaTime)
     {
-        speed.add(gravity);
-        gravity.multiply(deltaTime);
+        velocity.add(gravity);
+        gravity.multiply((float) deltaTime);
     }
 
     /**

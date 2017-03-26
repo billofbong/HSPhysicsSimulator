@@ -8,6 +8,8 @@ import hs.physics.Vector2;
 public class Rect extends Polygon
 {
 
+    private int numSides = 4;
+
     public Rect(Vector2 gravity)
     {
         super(gravity);
@@ -18,4 +20,9 @@ public class Rect extends Polygon
         super(gravity, xScale, yScale);
     }
 
+    public Rect(Vector2 gravity, int xScale, int yScale, boolean hasPhysics, int numSides, int numSides1)
+    {
+        super(gravity, xScale, yScale, hasPhysics, numSides);
+        this.numSides = numSides1;
+    }
 }

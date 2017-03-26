@@ -59,4 +59,12 @@ public class Scene
             this.sceneObjects.add(so);
         }
     }
+
+    public void updateAllSceneObjects(double deltaTime)
+    {
+        for (SceneObject so: sceneObjects)
+        {
+            so.update(deltaTime);
+        }
+    }
 }

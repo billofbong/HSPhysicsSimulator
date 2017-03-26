@@ -17,4 +17,9 @@ public class Circle extends Polygon
     {
         super(gravity, xScale, yScale);
     }
+
+    public Circle(Vector2 gravity, int xScale, int yScale, boolean hasPhysics, int numSides)
+    {
+        super(gravity, xScale, yScale, hasPhysics, numSides);
+    }
 }

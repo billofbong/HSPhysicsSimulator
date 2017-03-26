@@ -24,4 +24,9 @@ public class Polygon extends SceneObject
         super(gravity, xScale, yScale);
     }
 
+    public Polygon(Vector2 gravity, int xScale, int yScale, boolean hasPhysics, int numSides)
+    {
+        super(gravity, xScale, yScale, hasPhysics);
+        this.numSides = numSides;
+    }
 }
