@@ -19,7 +19,7 @@ public class Scene
 
     static
     {
-         DEMO_SCENE = new Scene(2);
+         DEMO_SCENE = new Scene(1);
          DEMO_SCENE.add(new Rect(new Vector2(0, -1), new Point2D.Float(0, 0)));
     }
     

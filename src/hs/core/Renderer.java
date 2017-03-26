@@ -86,6 +86,12 @@ public class Renderer extends Canvas
         //drawLine(-1f, -1f, 1f, 1f);
         //drawLine(1f, -1f, -1f, 1f);
         //drawLine(-.5f, -.25f, .5f, .5f);
+    
+        //drawLine(-.5f, .5f, .5f, .5f);
+        //drawLine(.5f, .5f, .5f, -.5f);
+        //drawLine(.5f, -.5f, -.5f, -.5f);
+        //drawLine(-.5f, -.5f, -.5f, .5f);
+        
         drawShapes(referenceScene.getSceneObjects());
     }
     
@@ -188,24 +194,18 @@ public class Renderer extends Canvas
                 }
             }
         }
-    }
-    
-    protected void drawShapes(SceneObject ... sceneObjects)
-    {
-        for(SceneObject so : sceneObjects)
+        else
         {
-            ArrayList<Point2D.Float> p2D = so.getVertices();
-            Point2D.Float origin = so.getOrigin();
-            
-            for(int i = 0; i < p2D.size() - 1; i++)
+            for(int y = (int) Math.min(y0, y1); y <= Math.max(y0, y1); y++)
             {
-                drawLine(origin.x + p2D.get(i).x, origin.y + p2D.get(i).y, origin.x + p2D.get(i + 1).x, origin.y + p2D.get(i + 1).y);
+                plot((int) x0, y, 0xffffff);
             }
         }
     }
     
     protected void drawShapes(ArrayList<SceneObject> sceneObjects)
     {
+        //System.out.println(sceneObjects.size());
         for(SceneObject so : sceneObjects)
         {
             ArrayList<Point2D.Float> p2D = so.getVertices();
@@ -213,7 +213,13 @@ public class Renderer extends Canvas
         
             for(int i = 0; i < p2D.size() - 1; i++)
             {
-                drawLine(origin.x + p2D.get(i).x, origin.y + p2D.get(i).y, origin.x + p2D.get(i + 1).x, origin.y + p2D.get(i + 1).y);
+                float x0 = origin.x + p2D.get(i).x;
+                float y0 = origin.y + p2D.get(i).y;
+                float x1 = origin.x + p2D.get(i + 1).x;
+                float y1 = origin.y + p2D.get(i + 1).y;
+                
+                System.out.println(x0 + ", " + y0 + "\t" + x1 + ", " + y1);
+                drawLine(x0, y0, x1, y1);
             }
         }
     }
