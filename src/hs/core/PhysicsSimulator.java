@@ -1,5 +1,7 @@
 package hs.core;
 
+import hs.world.Scene;
+
 /**
  * @author Corbin Naderzad
  */
@@ -15,13 +17,14 @@ public class PhysicsSimulator implements Runnable
     private volatile double delta;
     private volatile Renderer renderer;
     private boolean displayInfo;
+    private Scene scene;
     
     /**
      * Initializes a PhysicsSimulator object with Renderer.DEFAULT_RENDERER
      */
     public PhysicsSimulator()
     {
-        init(Renderer.DEFAULT_RENDERER);
+        init(Renderer.DEFAULT_RENDERER, Scene.DEFAULT_SCENE);
     }
     
     /**
@@ -30,15 +33,26 @@ public class PhysicsSimulator implements Runnable
      */
     public PhysicsSimulator(Renderer renderer)
     {
-        init(renderer);
+        init(renderer, Scene.DEFAULT_SCENE);
     }
     
-    private void init(Renderer renderer)
+    public PhysicsSimulator(Scene scene)
+    {
+        init(Renderer.DEFAULT_RENDERER, scene);
+    }
+    
+    public PhysicsSimulator(Renderer renderer, Scene scene)
+    {
+        init(renderer, scene);
+    }
+    
+    private void init(Renderer renderer, Scene scene)
     {
         displayInfo = false;
         running = false;
         delta = 0f;
         this.renderer = renderer;
+        this.scene = scene;
         thread = new Thread(this);
         thread.setName("Main rendering thread");
         thread.setPriority(10);
